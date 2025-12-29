@@ -1,0 +1,73 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+
+.detalleOferta{
+    
+    //      outline: 1px solid red;
+    
+    
+   &__header{
+        
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        @include m.tablet{
+            display: block;
+            text-align: left;
+        }
+   }
+   &__h2{
+    font-size: 1.6rem;
+    margin-block: 3rem;
+   }
+   &__span{
+     color:v.$text-muted;
+   }
+   &__div{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     @include m.tablet{
+        flex-direction: row;
+         justify-content: space-between;
+         align-items: start;
+
+     }
+   }
+   &__div--texto{}
+   &__h1{
+        font-size: 2.2rem;
+        margin: 0;
+   }
+   &__p{
+     margin-top: 0;
+   }
+   &__div--content{
+        
+        & .detalleOferta__div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .detalleOferta__p{
+                color: v.$text-muted;
+            }
+            @include m.tablet{
+                 align-items: start;
+            }
+        }
+    }
+    &__ul{
+         list-style-type: none;
+         list-style-image: url("../../src/img/flecha.svg");
+    }
+    &__footer{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 2rem;
+        @include m.tablet{
+            justify-content: right;
+        }
+    }
+  
+}

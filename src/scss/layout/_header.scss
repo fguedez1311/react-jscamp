@@ -1,0 +1,80 @@
+@use '../base/variables' as v;
+@use '../base' as m;
+
+
+.header{
+    // & > *{outline: 1px solid red;}
+    // background-color: wheat;
+    border-bottom: 1px solid v.$border;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:1rem;
+    
+    gap: 2rem;
+   
+    @include m.tablet{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 1rem;
+
+        
+    }
+  
+   
+
+    &__h1{
+        font-size: 2rem;
+        line-height: 1.2;
+        text-wrap: balance;
+        // background-color: blueviolet; 
+        gap: 0.7rem;
+        align-items: center;
+        display: flex;
+        margin-top: 0;
+        margin-bottom: 0;
+
+    }
+    &__svg{
+        // background-color: aquamarine;
+        width: 4rem;
+        height: 4rem;
+        color: v.$primary-light;
+    }
+    // nav
+    &__nav{
+        display: flex;
+        gap:1.2rem;
+        align-items: center;
+    }
+    &__a{
+          text-decoration: none;
+          color: var(--text-secondary);
+          transition: color 0.2s;
+          font-weight: 500;
+          &:hover, &:focus {
+                color: v.$primary;
+                outline: none;
+          }
+    } 
+    &__a--header{
+        padding: 1rem 1rem;
+        border-radius: 0.5rem;
+        background-color: #334155;
+        color: v.$text-primary;
+        display: inline-block;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        &:hover, &:focus {
+                color: rgb(129, 129, 160);
+                outline: none;
+          }
+    }
+    
+    //div
+    &__div{}
+    &__a{}
+}

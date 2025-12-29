@@ -1,0 +1,61 @@
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
+.hero{
+      
+      height: 500px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &__img{
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         z-index: -1;
+         left: 0;
+         right: 0;
+         mask-image: linear-gradient(to bottom, rgba(16, 25, 34, 1) 5%, rgba(16, 25, 34, 0) 80%);
+      }
+      &__h1
+      {
+          padding-top: 3rem;
+          font-size: 3rem;
+      }
+      &__p{}
+
+      
+     
+      &__button{
+          padding: 0.75rem 1.5rem;
+          border-radius: 0.5rem;
+          background-color: v.$primary;
+          color: white;
+          font-weight: 400;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+          font-family: inherit;
+          font-size: 1.6rem;
+          white-space: nowrap;
+          &:hover, /* pseudo-clase que significa que el ratón está encima */
+          &:focus { /* pseudo-clase que significa que el elemento tiene el foco */
+            background-color: v.$primary-hover;
+            outline: 2px solid white;
+            outline-offset: 2px;
+          }
+
+          &:active { 
+            transform: scale(0.90)
+          }
+          &:disabled {
+            opacity: .5;
+            pointer-events: none;
+          }
+
+         
+      }
+
+}
