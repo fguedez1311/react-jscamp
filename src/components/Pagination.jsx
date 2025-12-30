@@ -23,6 +23,7 @@ export function Pagination({ currentPage=1, totalPages=10,onPageChange }) {
           onPageChange(page)
        }
   }
+  console.log("render Pagination")
   return (
     <>
       <nav className="resultados__pagination">
