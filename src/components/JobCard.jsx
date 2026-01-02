@@ -4,7 +4,7 @@ import { useState } from "react"
  export function JobCard({job}) {
       const {data,titulo, empresa, ubicacion, descripcion }=job
       const [isApplied,setIsApplied]=useState(false)
-      console.log('Render')
+     
       function handleClick(){
         setIsApplied(!isApplied)
       }
