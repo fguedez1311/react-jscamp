@@ -1,4 +1,14 @@
+import {useId} from 'react'
+
 export function SearchFormSection() {
+  const idSearch=useId()
+  const idTechnology=useId()
+  const idLocation=useId()
+  const idExperienceLevel=useId()
+  const hamdleSubmit=(event)=>{
+    event.preventDefault()
+    console.log('Submit del formulario de búsqueda')
+  }
   return (
     <>
       <section className="jobs-search">
@@ -11,6 +21,7 @@ export function SearchFormSection() {
           className="form-busqueda form-busqueda--avanzada"
           id="empleos-search-form"
           role="search"
+          onSubmit={hamdleSubmit}
         >
           <div className="form-busqueda__div form-busqueda__div--principal">
             <svg
@@ -29,19 +40,20 @@ export function SearchFormSection() {
               <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
               <path d="M21 21l-6 -6" />
             </svg>
-
+            
             <input
               className="form-busqueda__input"
-              name="search"
+              name={idSearch}
               id="empleos-search-input"
               required
               type="text"
               placeholder="Buscar trabajos, empresas o habilidades"
             />
+            <button type="submit" className="boton-azul" style={{ position:'absolute',right:'9px' }}>Buscar</button>
           </div>
 
           <div className="formulario-busqueda__filtros">
-            <select name="technology" id="filter-technology" defaultValue="">
+            <select name={idTechnology} id="filter-technology" defaultValue="">
               <option value="" disabled>
                 Tecnología
               </option>
@@ -61,7 +73,7 @@ export function SearchFormSection() {
               <option value="php">PHP</option>
             </select>
 
-            <select name="location" id="filter-location" defaultValue="">
+            <select name={idLocation} id="filter-location" defaultValue="">
               <option value="" disabled>
                 Ubicación
               </option>
@@ -73,7 +85,7 @@ export function SearchFormSection() {
             </select>
 
             <select
-              name="experience-level"
+              name={idExperienceLevel}
               id="filter-experience-level"
               defaultValue=""
             >
