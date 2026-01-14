@@ -1,13 +1,26 @@
 import {useId} from 'react'
 
-export function SearchFormSection() {
+export function SearchFormSection({onSearch,onTextFilter}) {
   const idSearch=useId()
   const idTechnology=useId()
   const idLocation=useId()
   const idExperienceLevel=useId()
   const hamdleSubmit=(event)=>{
     event.preventDefault()
-    console.log('Submit del formulario de búsqueda')
+    const formData = new FormData(event.target)
+
+    const filters = {
+      technology: formData.get(idTechnology),
+      location: formData.get(idLocation),
+      experienceLevel: formData.get(idExperienceLevel),
+    }
+    
+
+    onSearch(filters)
+  }
+  const handleTextChange=(event)=>{
+      const text=event.target.value
+      onTextFilter(text)
   }
   return (
     <>
@@ -45,16 +58,16 @@ export function SearchFormSection() {
               className="form-busqueda__input"
               name={idSearch}
               id="empleos-search-input"
-              required
               type="text"
               placeholder="Buscar trabajos, empresas o habilidades"
+              onChange={handleTextChange}
             />
             <button type="submit" className="boton-azul" style={{ position:'absolute',right:'9px' }}>Buscar</button>
           </div>
 
           <div className="formulario-busqueda__filtros">
             <select name={idTechnology} id="filter-technology" defaultValue="">
-              <option value="" disabled>
+              <option value="">
                 Tecnología
               </option>
               <optgroup label="Tecnologías populares">
@@ -74,7 +87,7 @@ export function SearchFormSection() {
             </select>
 
             <select name={idLocation} id="filter-location" defaultValue="">
-              <option value="" disabled>
+              <option value="">
                 Ubicación
               </option>
               <option value="remoto">Remoto</option>
@@ -89,7 +102,7 @@ export function SearchFormSection() {
               id="filter-experience-level"
               defaultValue=""
             >
-              <option value="" disabled>
+              <option value="">
                 Nivel de experiencia
               </option>
               <option value="junior">Junior</option>
