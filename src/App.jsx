@@ -18,7 +18,9 @@ function App() {
   
   const jobsFilteredByFilters=jobsData.filter(job=>{
       return(
-          (filters.technology==='' || job.data.technology.toLowerCase()===filters.technology.toLowerCase())
+          (filters.technology==='' || job.data.technology.toLowerCase()===filters.technology.toLowerCase()) &&
+          (filters.location === '' || job.data.modalidad === filters.location) &&
+          (filters.experienceLevel === '' || job.data.nivel === filters.experienceLevel)
       )
   })
 

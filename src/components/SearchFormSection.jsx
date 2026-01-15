@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {useId} from 'react'
 
 export function SearchFormSection({onSearch,onTextFilter}) {
@@ -5,7 +6,9 @@ export function SearchFormSection({onSearch,onTextFilter}) {
   const idTechnology=useId()
   const idLocation=useId()
   const idExperienceLevel=useId()
-  const hamdleSubmit=(event)=>{
+   // Estado para saber qué campo está activo
+  const [focusedField, setFocusedField] = useState(null)
+  const handleSubmit=(event)=>{
     event.preventDefault()
     const formData = new FormData(event.target)
 
@@ -34,7 +37,7 @@ export function SearchFormSection({onSearch,onTextFilter}) {
           className="form-busqueda form-busqueda--avanzada"
           id="empleos-search-form"
           role="search"
-          onSubmit={hamdleSubmit}
+          onSubmit={handleSubmit}
         >
           <div className="form-busqueda__div form-busqueda__div--principal">
             <svg
@@ -60,7 +63,13 @@ export function SearchFormSection({onSearch,onTextFilter}) {
               id="empleos-search-input"
               type="text"
               placeholder="Buscar trabajos, empresas o habilidades"
+              onFocus={() => setFocusedField('search')}
+              onBlur={() => setFocusedField(null)}
               onChange={handleTextChange}
+              style={{
+                       borderColor: focusedField === 'search' ? '#4f46e5' : '#d1d5db',
+                       outline: focusedField === 'search' ? '2px solid #4f46e5' : 'none',
+              }}
             />
             <button type="submit" className="boton-azul" style={{ position:'absolute',right:'9px' }}>Buscar</button>
           </div>
