@@ -38,11 +38,7 @@ export function SearchFormSection({onSearch,onTextFilter}) {
           className="form-busqueda form-busqueda--avanzada"
           id="empleos-search-form"
           role="search"
-<<<<<<< HEAD
-          onChange={hamdleSubmit}
-=======
-          onSubmit={handleSubmit}
->>>>>>> c7e6ee5d916ebaab061878fd16f173808811bcc7
+          onChange={handleSubmit}
         >
           <div className="form-busqueda__div form-busqueda__div--principal">
             <svg
