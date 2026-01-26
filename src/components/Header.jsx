@@ -23,7 +23,7 @@ export function Header() {
             Home
           </a>{" "}
           &nbsp;| &nbsp;
-          <a href="empleos.html" className="header__a">
+          <a href="/search" className="header__a">
             Empleo
           </a>
         </nav>

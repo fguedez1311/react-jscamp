@@ -7,7 +7,8 @@ export function SearchFormSection({onSearch,onTextFilter}) {
   const idExperienceLevel=useId()
   const hamdleSubmit=(event)=>{
     event.preventDefault()
-    const formData = new FormData(event.target)
+    console.log("submit")
+    const formData = new FormData(event.currentTarget)
 
     const filters = {
       technology: formData.get(idTechnology),
@@ -34,7 +35,7 @@ export function SearchFormSection({onSearch,onTextFilter}) {
           className="form-busqueda form-busqueda--avanzada"
           id="empleos-search-form"
           role="search"
-          onSubmit={hamdleSubmit}
+          onChange={hamdleSubmit}
         >
           <div className="form-busqueda__div form-busqueda__div--principal">
             <svg
@@ -62,7 +63,7 @@ export function SearchFormSection({onSearch,onTextFilter}) {
               placeholder="Buscar trabajos, empresas o habilidades"
               onChange={handleTextChange}
             />
-            <button type="submit" className="boton-azul" style={{ position:'absolute',right:'9px' }}>Buscar</button>
+           
           </div>
 
           <div className="formulario-busqueda__filtros">
