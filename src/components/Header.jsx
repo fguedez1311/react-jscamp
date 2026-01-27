@@ -1,3 +1,5 @@
+import {Link} from "./Link";
+
 export function Header() {
   return (
     <>
@@ -19,13 +21,13 @@ export function Header() {
           DevJobs
         </h1>
         <nav className="header__nav">
-          <a href="/" className="header__a">
+          <Link href="/" className="header__a">
             Home
-          </a>{" "}
+          </Link>{" "}
           &nbsp;| &nbsp;
-          <a href="/search" className="header__a">
+          <Link href="/search" className="header__a">
             Empleo
-          </a>
+          </Link>
         </nav>
         <div className="header__div">
           <devjobs-avatar
