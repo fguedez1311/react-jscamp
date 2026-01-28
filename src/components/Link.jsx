@@ -1,9 +1,9 @@
 import { useRouter } from "../hooks/useRouter";
 export  function Link({ href, children, ...restOfProps }) {
-  const {navigeTo}=useRouter()
+  const {navigateTo}=useRouter()
   const handleClick = (event) => {
     event.preventDefault();
-    navigeTo(href)
+     navigateTo(href)
     
   };
   return (
