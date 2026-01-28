@@ -6,9 +6,10 @@ import { Header } from "./components/Header";
 import { HomePage } from "./pages/Home";
 import { SearchPage } from "./pages/SearchPage";
 import { NoFoundPage } from "./pages/404";
+import { useRouter } from "./hooks/useRouter";
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const {currentPath}=useRouter()
 
   let page = <NoFoundPage />;
   if (currentPath === "/") {
@@ -16,15 +17,7 @@ function App() {
   } else if (currentPath === "/search") {
     page = <SearchPage />;
   }
-  useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-    };
-    window.addEventListener("popstate", handleLocationChange);
-    return () => {
-      window.removeEventListener("popstate", handleLocationChange);
-    };
-  }, []);
+  
   return (
     <>
       <Header />
