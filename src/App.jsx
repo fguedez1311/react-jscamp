@@ -11,8 +11,8 @@ function App() {
   return (
     <>
       <Header />
-      <Route path="/" component={HomePage} />
-      <Route path="/search" component={SearchPage} />
+        <Route path="/" component={HomePage} />
+        <Route path="/search" component={SearchPage} />
 
       <Footer />
     </>
