@@ -1,31 +1,42 @@
-import { useState } from 'react'
-import {useId} from 'react'
+import { useState } from "react";
+import { useId } from "react";
 
-export function SearchFormSection({onSearch,onTextFilter}) {
-  const idSearch=useId()
-  const idTechnology=useId()
-  const idLocation=useId()
-  const idExperienceLevel=useId()
-   // Estado para saber qué campo está activo
-  const [focusedField, setFocusedField] = useState(null)
-  const handleSubmit=(event)=>{
-    event.preventDefault()
-    console.log("submit")
-    const formData = new FormData(event.currentTarget)
+const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,onSearch,onTextFilter}) => {
+  const[searchText,setSearchText]=useState("")
+  const handleSubmit = (event) => {
+
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
 
     const filters = {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel),
-    }
-    
+    };
 
-    onSearch(filters)
+    onSearch(filters);
+  };
+  const handleTextChange = (event) => {
+    const text = event.target.value;
+    setSearchText(text)
+    onTextFilter(text);
+  };
+  return {
+    searchText,
+    handleSubmit,
+    handleTextChange
   }
-  const handleTextChange=(event)=>{
-      const text=event.target.value
-      onTextFilter(text)
-  }
+};
+
+export function SearchFormSection({ onSearch, onTextFilter }) {
+  const idSearch = useId();
+  const idTechnology = useId();
+  const idLocation = useId();
+  const idExperienceLevel = useId();
+  // Estado para saber qué campo está activo
+  const [focusedField, setFocusedField] = useState(null);
+  const {handleSubmit,handleTextChange}= useSearchForm({idTechnology,idLocation,idExperienceLevel,onSearch,onTextFilter})
   return (
     <>
       <section className="jobs-search">
@@ -57,29 +68,27 @@ export function SearchFormSection({onSearch,onTextFilter}) {
               <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
               <path d="M21 21l-6 -6" />
             </svg>
-            
+
             <input
               className="form-busqueda__input"
               name={idSearch}
               id="empleos-search-input"
               type="text"
               placeholder="Buscar trabajos, empresas o habilidades"
-              onFocus={() => setFocusedField('search')}
+              onFocus={() => setFocusedField("search")}
               onBlur={() => setFocusedField(null)}
               onChange={handleTextChange}
               style={{
-                       borderColor: focusedField === 'search' ? '#4f46e5' : '#d1d5db',
-                       outline: focusedField === 'search' ? '2px solid #4f46e5' : 'none',
+                borderColor: focusedField === "search" ? "#4f46e5" : "#d1d5db",
+                outline:
+                  focusedField === "search" ? "2px solid #4f46e5" : "none",
               }}
             />
-           
           </div>
 
           <div className="formulario-busqueda__filtros">
             <select name={idTechnology} id="filter-technology" defaultValue="">
-              <option value="">
-                Tecnología
-              </option>
+              <option value="">Tecnología</option>
               <optgroup label="Tecnologías populares">
                 <option value="javascript">JavaScript</option>
                 <option value="python">Python</option>
@@ -97,9 +106,7 @@ export function SearchFormSection({onSearch,onTextFilter}) {
             </select>
 
             <select name={idLocation} id="filter-location" defaultValue="">
-              <option value="">
-                Ubicación
-              </option>
+              <option value="">Ubicación</option>
               <option value="remoto">Remoto</option>
               <option value="cdmx">Ciudad de México</option>
               <option value="guadalajara">Guadalajara</option>
@@ -112,9 +119,7 @@ export function SearchFormSection({onSearch,onTextFilter}) {
               id="filter-experience-level"
               defaultValue=""
             >
-              <option value="">
-                Nivel de experiencia
-              </option>
+              <option value="">Nivel de experiencia</option>
               <option value="junior">Junior</option>
               <option value="mid">Mid-level</option>
               <option value="senior">Senior</option>

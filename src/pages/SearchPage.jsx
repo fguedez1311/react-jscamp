@@ -48,19 +48,20 @@ export function SearchPage() {
   useEffect(() => {
     document.title=`Resultados: ${jobsWithTextFilter.length}, Pagina ${currentPage}-DevJobs `
   },[jobsWithTextFilter,currentPage])
-  useEffect(() => {
-    // Suscripción a un evento
-    const handleResize=()=>{
-      console.log("Ventana Redimensionada")
-      console.log(window.innerHeight,window.innerWidth)
-    }
-    window.addEventListener('resize',handleResize)
-    //Limpieza: Se ejecuta antes de remontar o antes de rejecutar 
+
+  // useEffect(() => {
+  //   // Suscripción a un evento
+  //   const handleResize=()=>{
+  //     console.log("Ventana Redimensionada")
+  //     console.log(window.innerHeight,window.innerWidth)
+  //   }
+  //   window.addEventListener('resize',handleResize)
+  //   //Limpieza: Se ejecuta antes de remontar o antes de rejecutar 
     
-    return () => {
-      window.removeEventListener('resize',handleResize)
-    }
-  }, [])
+  //   return () => {
+  //     window.removeEventListener('resize',handleResize)
+  //   }
+  // }, [])
   
 
   
