@@ -6,7 +6,8 @@ import { SearchFormSection } from "../components/SearchFormSection";
 import jobsData from "../data.json";
 
 const RESULTS_PER_PAGE=5
-export function SearchPage() {
+
+const useFilters=()=>{
   const [filters,setFilters]=useState({
       technology: "",
       location: "",
@@ -44,27 +45,33 @@ export function SearchPage() {
       setTextToFilter(newTextToFilter)
       setCurrentPage(1)
   }
+  return{
+     jobsWithTextFilter,
+     pageResults,
+     totalPages,
+     currentPage,
+     handlePageChange,
+     handleSearch,
+     handleTextFilter
+  }
+}
+export function SearchPage() {
 
+  const {
+     jobsWithTextFilter,
+     pageResults,
+     totalPages,
+     currentPage,
+     handlePageChange,
+     handleSearch,
+     handleTextFilter
+  }=useFilters()
+  
   useEffect(() => {
     document.title=`Resultados: ${jobsWithTextFilter.length}, Pagina ${currentPage}-DevJobs `
   },[jobsWithTextFilter,currentPage])
 
-  // useEffect(() => {
-  //   // Suscripción a un evento
-  //   const handleResize=()=>{
-  //     console.log("Ventana Redimensionada")
-  //     console.log(window.innerHeight,window.innerWidth)
-  //   }
-  //   window.addEventListener('resize',handleResize)
-  //   //Limpieza: Se ejecuta antes de remontar o antes de rejecutar 
-    
-  //   return () => {
-  //     window.removeEventListener('resize',handleResize)
-  //   }
-  // }, [])
-  
-
-  
+   
   return (
     <>
       
