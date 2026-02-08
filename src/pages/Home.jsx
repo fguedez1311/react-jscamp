@@ -7,7 +7,7 @@ export function HomePage() {
     const formData=new FormData(event.target)
     const searchText=formData.get("search")
     const url=searchText
-     ? `/search?tech=${encodeURIComponent(searchText)}`
+     ? `/search?text=${encodeURIComponent(searchText)}`
      : '/search'
      navigateTo(url)
   }
