@@ -93,15 +93,14 @@ export function SearchPage() {
      handleTextFilter
   }=useFilters()
   
-  useEffect(() => {
-    document.title=`Resultados: ${total}, Pagina ${currentPage}-DevJobs `
-  },[total,currentPage])
-
+  
+  const title= loading ? `Cargando...- DevJobs` : `Resultados: ${total}, Página ${currentPage}-DevJobs`
    
   return (
     <>
       
       <main>
+        <title>{title}</title>
         <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter}/>
         <section className="resultados">
         {

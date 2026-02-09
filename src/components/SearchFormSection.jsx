@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { useId } from "react";
 
-const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,onSearch,onTextFilter}) => {
+let timeoutId=null
+
+const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,idText,onSearch,onTextFilter}) => {
   const[searchText,setSearchText]=useState("")
   const handleSubmit = (event) => {
 
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
+
+    if(event.target.name===idText){
+      return
+    }
 
     const filters = {
       technology: formData.get(idTechnology),
@@ -19,8 +25,14 @@ const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,onSearch,onTex
   };
   const handleTextChange = (event) => {
     const text = event.target.value;
-    setSearchText(text)
-    onTextFilter(text);
+    setSearchText(text) //Actualizamos el input inmediatamente
+    //DEBOUNCE: Cancelar el timeout anterior
+    if (timeoutId){
+      clearTimeout(timeoutId)
+    }
+    timeoutId=setTimeout(()=>{
+      onTextFilter(text);
+    },500)
   };
   return {
     searchText,
@@ -30,13 +42,13 @@ const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,onSearch,onTex
 };
 
 export function SearchFormSection({ onSearch, onTextFilter }) {
-  const idSearch = useId();
+  const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
   const idExperienceLevel = useId();
   // Estado para saber qué campo está activo
   const [focusedField, setFocusedField] = useState(null);
-  const {handleSubmit,handleTextChange}= useSearchForm({idTechnology,idLocation,idExperienceLevel,onSearch,onTextFilter})
+  const {handleSubmit,handleTextChange}= useSearchForm({idTechnology,idLocation,idExperienceLevel,idText,onSearch,onTextFilter})
   return (
     <>
       <section className="jobs-search">
@@ -71,7 +83,7 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
 
             <input
               className="form-busqueda__input"
-              name={idSearch}
+              name={idText}
               id="empleos-search-input"
               type="text"
               placeholder="Buscar trabajos, empresas o habilidades"
