@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useId } from "react";
+import { useState,useId,useRef } from "react";
 
-let timeoutId=null
+
+
 
 const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,idText,onSearch,onTextFilter}) => {
+  const timeoutId=useRef(null)
   const[searchText,setSearchText]=useState("")
+
   const handleSubmit = (event) => {
 
     event.preventDefault();
@@ -24,15 +26,16 @@ const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,idText,onSearc
     onSearch(filters);
   };
   const handleTextChange = (event) => {
+    
     const text = event.target.value;
     setSearchText(text) //Actualizamos el input inmediatamente
     //DEBOUNCE: Cancelar el timeout anterior
-    if (timeoutId){
-      clearTimeout(timeoutId)
+    if (timeoutId.current){
+      clearTimeout(timeoutId.current)
     }
-    timeoutId=setTimeout(()=>{
+    timeoutId.current=setTimeout(()=>{
       onTextFilter(text);
-    },500)
+    },700)
   };
   return {
     searchText,
@@ -46,9 +49,16 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
   const idTechnology = useId();
   const idLocation = useId();
   const idExperienceLevel = useId();
+  const inputRef=useRef()
   // Estado para saber qué campo está activo
   const [focusedField, setFocusedField] = useState(null);
   const {handleSubmit,handleTextChange}= useSearchForm({idTechnology,idLocation,idExperienceLevel,idText,onSearch,onTextFilter})
+  const handleClearSubmit=(event)=>{
+  event.preventDefault()
+  inputRef.current.value=""
+  onTextFilter("")
+}
+
   return (
     <>
       <section className="jobs-search">
@@ -83,6 +93,7 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
 
             <input
               className="form-busqueda__input"
+              ref={inputRef}
               name={idText}
               id="empleos-search-input"
               type="text"
@@ -96,6 +107,7 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
                   focusedField === "search" ? "2px solid #4f46e5" : "none",
               }}
             />
+            <button className="boton-azul" onClick={handleClearSubmit}>X</button>
           </div>
 
           <div className="formulario-busqueda__filtros">
