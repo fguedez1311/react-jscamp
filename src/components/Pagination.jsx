@@ -23,11 +23,16 @@ export function Pagination({ currentPage=1, totalPages=10,onPageChange }) {
           onPageChange(page)
        }
   }
+  const builPageUrl=(page)=>{
+    const url =new URL(window.location)
+    url.searchParams.set('page',page)
+    return `${url.pathname}?${url.searchParams.toString()}`
+  }
   
   return (
     <>
       <nav className="resultados__pagination">
-        <a className="resultados__a" href="#" style={stylePrevButton} onClick={handlePrevClick}>
+        <a className="resultados__a" href={builPageUrl(currentPage-1)} style={stylePrevButton} onClick={handlePrevClick}>
           <svg
             width="16"
             height="16"
@@ -46,6 +51,7 @@ export function Pagination({ currentPage=1, totalPages=10,onPageChange }) {
             pages.map((page) => (
               <a
                 key={page}
+                href={builPageUrl(page)}
                 className={`resultados__a ${currentPage===page ? 'is-active':''}`}
                 onClick={(event)=>handleChangePage(event,page)}
               >
@@ -56,7 +62,7 @@ export function Pagination({ currentPage=1, totalPages=10,onPageChange }) {
 
         }
           
-        <a className="resultados__a" href="#" style={styleNextButton} onClick={handleNextClick}>
+        <a className="resultados__a" href={builPageUrl(currentPage+1)} style={styleNextButton} onClick={handleNextClick}>
           <svg
             width="16"
             height="16"
