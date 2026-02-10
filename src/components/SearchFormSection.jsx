@@ -44,7 +44,7 @@ const useSearchForm = ({idTechnology,idLocation,idExperienceLevel,idText,onSearc
   }
 };
 
-export function SearchFormSection({ onSearch, onTextFilter }) {
+export function SearchFormSection({ onSearch, onTextFilter,initialText}) {
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
@@ -106,6 +106,7 @@ export function SearchFormSection({ onSearch, onTextFilter }) {
                 outline:
                   focusedField === "search" ? "2px solid #4f46e5" : "none",
               }}
+              defaultValue={initialText}
             />
             <button className="boton-azul" onClick={handleClearSubmit}>X</button>
           </div>
